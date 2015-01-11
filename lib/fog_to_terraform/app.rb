@@ -57,7 +57,7 @@ class FogToTerraform::App
     aws_key_path = "ssh/#{credentials_key.to_s}.pem"
     aws_key_name = credentials_key.to_s
 
-    File.open("terraform.tf", "w") do |f|
+    File.open("terraform.tfvars", "w") do |f|
       f << <<-EOS
 aws_access_key = "#{aws_access_key_id}"
 aws_secret_key = "#{aws_secret_access_key}"
@@ -67,7 +67,7 @@ aws_region = "#{aws_region}"
 network = "10.10"
       EOS
     end
-    puts "created terraform.tf"
+    puts "created terraform.tfvars"
 
 
     settings.set "provider.name", "aws"

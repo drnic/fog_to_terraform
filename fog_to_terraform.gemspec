@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = FogToTerraform::VERSION
   spec.authors       = ["Dr Nic Williams"]
   spec.email         = ["drnicwilliams@gmail.com"]
-  spec.summary       = %q{Creates a `terraform.tf` input variable file for terraform plans using credentials from a fog-formatted YAML file.}
-  spec.description   = %q{Creates a `terraform.tf` input variable file for terraform plans using credentials from a fog-formatted YAML file.}
+  spec.summary       = %q{Creates a `terraform.tfvars` input variable file for terraform plans using credentials from a fog-formatted YAML file.}
+  spec.description   = %q{Creates a `terraform.tfvars` input variable file for terraform plans using credentials from a fog-formatted YAML file.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

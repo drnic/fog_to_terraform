@@ -13,6 +13,6 @@
 *.a
 mkmf.log
 
-terraform.tf
+terraform.tfvars
 ssh/*.pem
 settings.yml

@@ -1,7 +1,7 @@
 fog to terraform
 ================
 
-Creates a `terraform.tf` input variable file for terraform plans using credentials from a fog-formatted YAML file.
+Creates a `terraform.tfvars` input variable file for terraform plans using credentials from a fog-formatted YAML file.
 
 Given the following example fog file (defaults to `~/.fog`\):
 
@@ -12,13 +12,13 @@ Given the following example fog file (defaults to `~/.fog`\):
   :aws_secret_access_key: SECRET
 ```
 
-A `terraform.tf` file will be created in the current folder with the following command:
+A `terraform.tfvars` file will be created in the current folder with the following command:
 
 ```
 fog_to_terraform -C path/to/fog.yml student1
 ```
 
-The output `/path/to/terraform.tf` will look like:
+The output `/path/to/terraform.tfvars` will look like:
 
 ```hcl
 aws_access_key = "ACCESS"
