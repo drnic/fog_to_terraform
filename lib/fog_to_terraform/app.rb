@@ -1,9 +1,14 @@
 require "optparse"
 require "yaml"
+require "cyoi/cli/key_pair"
 
 class FogToTerraform::App
 
   def self.start(args)
+    # for cyoi
+    extend Cyoi::Cli::Helpers::Settings
+    @settings_dir = File.expand_path(".")
+
     credentials_file = "~/.fog"
     aws_region = "us-west-2"
 
@@ -54,5 +59,23 @@ network = "10.10"
       EOS
     end
     puts "created terraform.tf"
+
+
+    settings.set "provider.name", "aws"
+    settings.set "provider.credentials.aws_access_key_id", aws_access_key_id
+    settings.set "provider.credentials.aws_secret_access_key", aws_secret_access_key
+    settings.set "provider.region", aws_region
+    save_settings!
+
+    keypair = Cyoi::Cli::KeyPair.new([aws_key_name, settings_dir])
+    keypair.execute!
+
+    mkdir_p(File.dirname(aws_key_path))
+    chmod(0700, File.dirname(aws_key_path))
+
+    private_key = settings.key_pair.private_key
+    File.open(aws_key_path, "w") { |file| file << private_key }
+    chmod(0600, aws_key_path)
+    puts "created #{aws_key_path}"
   end
 end

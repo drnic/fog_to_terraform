@@ -12,4 +12,7 @@
 *.o
 *.a
 mkmf.log
+
 terraform.tf
+ssh/*.pem
+settings.yml
