@@ -27,9 +27,18 @@ class FogToTerraform::App
         lambda { |value| credentials_file = value }
     end
     remaining_args = opts.parse(args)
-    credentials_key = remaining_args.shift || "default"
 
     all_credentials = YAML.load_file(File.expand_path(credentials_file))
+    unless credentials_key = remaining_args.shift
+      if all_credentials.keys.size == 1
+        credentials_key = all_credentials.keys.first
+      else
+        $stderr.puts "#{credentials_file} contains more than one key; pass it as an argument\n\n"
+        puts opts
+        exit 1
+      end
+    end
+
     credentials = all_credentials[credentials_key.to_sym] || all_credentials[credentials_key.to_s]
     unless credentials
       $stderr.puts "Cannot find '#{credentials_key}' key in #{credentials_file}\n\n"
