@@ -27,7 +27,7 @@ class FogToTerraform::App
         lambda { |value| credentials_file = value }
     end
     remaining_args = opts.parse(args)
-    credentials_key = args.shift || "default"
+    credentials_key = remaining_args.shift || "default"
 
     all_credentials = YAML.load_file(File.expand_path(credentials_file))
     credentials = all_credentials[credentials_key.to_sym] || all_credentials[credentials_key.to_s]
@@ -66,6 +66,7 @@ network = "10.10"
     settings.set "provider.credentials.aws_secret_access_key", aws_secret_access_key
     settings.set "provider.region", aws_region
     save_settings!
+    reload_settings!
 
     keypair = Cyoi::Cli::KeyPair.new([aws_key_name, settings_dir])
     keypair.execute!
