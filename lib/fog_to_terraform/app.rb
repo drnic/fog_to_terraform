@@ -79,6 +79,7 @@ network = "10.10"
 
     keypair = Cyoi::Cli::KeyPair.new([aws_key_name, settings_dir])
     keypair.execute!
+    reload_settings!
 
     mkdir_p(File.dirname(aws_key_path))
     chmod(0700, File.dirname(aws_key_path))
